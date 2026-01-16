@@ -24,4 +24,4 @@ jobs:
       - name: Run ML monitoring
         env:
           FIREBASE_CREDENTIALS: ${{ secrets.FIREBASE_CREDENTIALS }}
-        run: python backend-ml/ml-runner.py
+        run: python backend-ml/ml_runner.py
