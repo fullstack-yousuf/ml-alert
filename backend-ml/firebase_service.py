@@ -18,7 +18,7 @@ with tempfile.NamedTemporaryFile(delete=False, mode="w", suffix=".json") as f:
 cred = credentials.Certificate(cred_path)
 
 firebase_admin.initialize_app(cred, {
-    "databaseURL": "https://diabetes-monitoring-fyp-default-rtdb.firebaseio.com/"
+    "databaseURL": "https://diabetes-monitoring-fyp-default-rtdb.asia-southeast1.firebasedatabase.app"
 })
 
 def get_latest_reading():
