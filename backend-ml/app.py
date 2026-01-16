@@ -1,15 +1,12 @@
-from flask import Flask, jsonify
 from firebase_service import get_latest_reading, send_alert
 from model import detect
 from datetime import datetime
 
-app = Flask(__name__)
-
-@app.route("/check", methods=["GET"])
-def check():
+def run():
     data = get_latest_reading()
     if not data:
-        return jsonify({"status": "no data"})
+        print("No data found")
+        return
 
     glucose = data["glucose"]
     heartRate = data["heartRate"]
@@ -22,18 +19,17 @@ def check():
                 "glucose": glucose,
                 "heartRate": heartRate,
                 "timestamp": datetime.now().isoformat(),
-                "message": "⚠️testing Anomaly Detected"
+                "message": "⚠️ Anomaly Detected"
             }
         }
-    # Pass that payload to your function
         send_alert(payload)
 
-    return jsonify({
+    print({
         "glucose": glucose,
         "heartRate": heartRate,
-        "anomaly": int(is_anomaly),
-        
+        "anomaly": int(is_anomaly)
     })
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    run()
+
